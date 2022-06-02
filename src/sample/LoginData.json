@@ -1,0 +1,10 @@
+{
+  "sessionToken": "eyJhbGcjOjJIUzI1NiJ8.eyJzdWIiOiI2MDAwMDQ0NCJ9.0notx8_3mUfeHGXVPw4RKre7zqLdu0p4GZMmi66ztyZ",
+  "agentCode": "89898989",
+  "role": "agent",
+  "name": "Kevin",
+  "email": "kevinwong@email.com",
+  "status": "success",
+  "message": "Login successfully.",
+  "status_code": 200
+}
