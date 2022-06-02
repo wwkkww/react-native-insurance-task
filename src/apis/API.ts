@@ -1,25 +1,44 @@
 const LOGIN_DATA = require('../sample/LoginData.json')
+const PROFILE_RESPONSE = require('../sample/LoginData.json')
 
 export type AuthData = {
   sessionToken: string;
-  agentCode: string;
-  role: string;
+  accountNumber: string;
   name: string;
+  email: string;
+  phone: string;
   status: string;
   message: string;
   status_code: number;
+};
+
+export type ProfileData = {
+  accountNumber: string;
+  name: string;
   email: string;
+  phone: string;
+  status: string;
+  message: string;
+  status_code: number;
 };
 
 type Login = {
   sourceType: string,
   remoteUrl: string,
-  requestMethod: "GET" | "POST",
+  requestMethod: "POST",
   localData: AuthData,
 }
 
+type Profile = {
+  sourceType: string,
+  remoteUrl: string,
+  requestMethod: "POST",
+  localData: ProfileData,
+}
+
 type APIS = {
-  login: Login
+  login: Login;
+  updateProfile: Profile
 }
 
 export const SourceType = {
@@ -34,4 +53,10 @@ export const apis:  APIS = {
     requestMethod: "POST",
     localData: LOGIN_DATA,
   },
+  updateProfile: {
+    sourceType: SourceType.local,
+    remoteUrl: 'http://myapiendpoint/users/update_profile',
+    requestMethod: "POST",
+    localData: PROFILE_RESPONSE,
+  }
 }

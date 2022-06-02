@@ -1,10 +1,9 @@
 {
-  "sessionToken": "eyJhbGcjOjJIUzI1NiJ8.eyJzdWIiOiI2MDAwMDQ0NCJ9.0notx8_3mUfeHGXVPw4RKre7zqLdu0p4GZMmi66ztyZ",
   "accountNumber": "89898989",
   "name": "Kevin",
   "email": "kevinwong@email.com",
   "phone": "60108866999",
   "status": "success",
-  "message": "Login successfully.",
+  "message": "update successfully.",
   "status_code": 200
 }
