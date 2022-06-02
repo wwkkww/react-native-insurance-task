@@ -25,6 +25,7 @@ type SettingScreenProp = StackNavigationProp<AppStackParamList, 'Settings'>;
 
 const SettingScreen = () => {
   const userInfo: UserInfo = useSelector((state: RootState) => state.UserInfo);
+  const appInfo: AppInfo = useSelector((state: RootState) => state.AppInfo);
   const [name, setName] = useState<string | undefined>();
   const [phone, setPhone] = useState<string | undefined>();
   const [email, setEmail] = useState<string | undefined>();
@@ -45,7 +46,8 @@ const SettingScreen = () => {
   const saveProfile = () => {
     if (email && name && phone) {
       auth.updateProfile(email, name, phone);
-      Alert.alert('Profile updated 👍', '', [
+      const msg = appInfo.language === 'english' ? 'Profile updated 👍' : 'Profil dikemaskini 👍'
+      Alert.alert(msg, '', [
         {text: 'OK', onPress: () => navigation.navigate('Dashboard')},
       ]);
     } else {
@@ -61,39 +63,39 @@ const SettingScreen = () => {
         enableAutomaticScroll={true}
         style={{height: Dimensions.get('window').height}}>
         <View style={styles.header}>
-          <Text style={styles.textHeader}>Profile</Text>
+          <Text style={styles.textHeader}>{appInfo.language == 'english' ? "Profile" : "Profil"}</Text>
         </View>
         <ScrollView style={styles.column}>
           <>
             <Input
-              title="Account number"
+              title={appInfo.language == 'english' ? "Account number" : "Nombor Akaun" }
               placeholder=""
               onChangeText={() => {}}
               value={accountNumber}
               disabled={true}
             />
             <Input
-              title="Email"
+              title={appInfo.language == 'english' ? "Email" : "Emel" }
               placeholder=""
               onChangeText={() => {}}
               value={email}
               disabled={true}
             />
             <Input
-              title="Name"
-              placeholder="Your name"
+              title={appInfo.language == 'english' ? "Name" : "Nama" }
+              placeholder={appInfo.language == 'english' ? "Your name" : "Nama anda" }
               onChangeText={val => setName(val)}
               value={name}
             />
             <Input
-              title="Phone"
+              title={appInfo.language == 'english' ? "Phone" : "Nombor telefon"}
               value={phone}
-              placeholder="Your phone number"
+              placeholder={appInfo.language == 'english' ? "Your phone number" : "Nombor telefon anda" }
               onChangeText={val => setPhone(val)}
             />
           </>
         </ScrollView>
-        <Button title="Save profile" onPress={saveProfile} />
+        <Button title={appInfo.language == 'english' ? "Save profile" : "Simpan profil"} onPress={saveProfile} />
         <Signout />
       </KeyboardAwareScrollView>
     </SafeAreaView>

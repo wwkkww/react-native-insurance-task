@@ -32,7 +32,6 @@ const DashboardScreen = () => {
   const navigation = useNavigation<DashboardScreenProp>();
 
   useEffect(() => {
-    
     let mounted = true;
     getPlanByAccountNumber(userInfo.accountNumber, appInfo.language).then(
       data => {
@@ -42,11 +41,33 @@ const DashboardScreen = () => {
         isLoading(false);
       },
     );
+
     return () => {
       mounted = false;
     };
   }, []);
 
+  useEffect(() => {
+    console.log('language effect', appInfo);
+    isLoading(true);
+    let mounted = true;
+    getPlanByAccountNumber(userInfo.accountNumber, appInfo.language).then(
+      data => {
+        if (mounted) {
+          setPlans(data);
+        }
+        isLoading(false);
+      },
+    );
+
+    return () => {
+      mounted = false;
+    };
+  }, [appInfo.language]);
+
+  useEffect(() => {}, [appInfo.theme]);
+
+  const loadPlan = () => {};
 
   const renderPlanRow: ListRenderItem<Plan> = ({item}) => {
     return (
@@ -74,9 +95,15 @@ const DashboardScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.textHeader}>
-          Policy Summary for {userInfo.name}
-        </Text>
+        {appInfo.language == 'english' ? (
+          <Text style={styles.textHeader}>
+            {userInfo.name} Policy Summary 
+          </Text>
+        ) : (
+          <Text style={styles.textHeader}>
+            {userInfo.name} Ringkasan Polisi 
+          </Text>
+        )}
       </View>
       {loading ? (
         <Loader />
@@ -91,7 +118,7 @@ const DashboardScreen = () => {
       )}
 
       <Button
-        title="Settings"
+        title={appInfo.language == 'english' ? "Settings" : "Tetapan"}
         onPress={() => navigation.navigate('Settings')}
       />
       <Signout />

@@ -17,7 +17,7 @@ export const getPlanByAccountNumber = (accountNumber: string, language: string =
         console.log('call getPlan api byy account number', accountNumber)
       }
       resolve(response);
-    }, 2500);
+    }, 2000);
   });
 };
 

@@ -8,15 +8,19 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import { setLanguage } from '../store/actions/AppSettingAction';
+
 
 const LanguageSelect = () => {
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => Alert.alert('click EN')}>
+      <TouchableOpacity onPress={() => dispatch(setLanguage({ language: "english"}))}>
         <Text style={styles.text}> EN </Text>
       </TouchableOpacity>
       <Text style={styles.text}> | </Text>
-      <TouchableOpacity onPress={() => Alert.alert('click MY')}>
+      <TouchableOpacity onPress={() => dispatch(setLanguage({ language: "malay"}))}>
         <Text style={styles.text}> MY </Text>
       </TouchableOpacity>
     </View>

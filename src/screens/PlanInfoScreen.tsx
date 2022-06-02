@@ -26,9 +26,8 @@ import Signout from '../components/Signout';
 import {getPlanByAccountNumber} from '../services/planService';
 import {apis, SourceType, Plan, Plans} from '../apis/API';
 
-
-
 const PlanInfoScreen = () => {
+  const appInfo: AppInfo = useSelector((state: RootState) => state.AppInfo);
   const [data, setData] = useState<Plan | null>(null);
   const [user, setUser] = useState<UserInfo | null>(null);
   const route = useRoute<RouteProp<AppStackParamList, 'Plan'>>();
@@ -45,8 +44,13 @@ const PlanInfoScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.textHeader}>Policy Details</Text>
-        { user && <Text style={styles.textHeader}>{user.name}</Text>}
+        {appInfo.language == 'english' ? (
+          <Text style={styles.textHeader}>Policy Details</Text>
+        ) : (
+          <Text style={styles.textHeader}>Polisi Deliti</Text>
+        )}
+
+        {user && <Text style={styles.textHeader}>{user.name}</Text>}
       </View>
       {data && (
         <ScrollView style={styles.column}>
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textHeader: {
     color: '#dd0000',
@@ -114,18 +118,18 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     padding: 5,
-    alignContent: 'center'
+    alignContent: 'center',
   },
   title: {
     fontSize: 14,
     fontWeight: '800',
-    color: '#8B0000'
+    color: '#8B0000',
   },
   text: {
     fontSize: 14,
     color: '#000',
     fontWeight: '800',
-    marginLeft: 10
+    marginLeft: 10,
   },
   desc: {
     fontSize: 14,
