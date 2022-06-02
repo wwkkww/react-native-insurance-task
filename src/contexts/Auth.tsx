@@ -1,14 +1,17 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch, useSelector} from 'react-redux';
-import {AuthData, authService} from '../services/authService';
+import { authService} from '../services/authService';
 import {setLogin} from '../store/actions/LoginAction';
+import {apis, SourceType, ProfileData, AuthData} from '../apis/API';
+
 
 type AuthContextData = {
   authData?: AuthData;
   loading: boolean;
   signIn(email: string, password:string): Promise<void>;
   signOut(): void;
+  updateProfile(email: string, name: string, phone: string): Promise<void>;
 };
 
 const AUTH_DATA_KEY = '@@AuthData'
@@ -17,6 +20,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({children}) => {
   const [authData, setAuthData] = useState<AuthData>();
+  const [profileData, setProfileData] = useState<ProfileData>();
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
@@ -53,8 +57,18 @@ const AuthProvider: React.FC = ({children}) => {
     await AsyncStorage.removeItem(AUTH_DATA_KEY);
   };
 
+  const updateProfile = async (email: string, name: string, phone: string): Promise<void> => {
+    const _profileData = await authService.updateProfileByEmail(email, name, phone);
+    console.log('update success', _profileData)
+    if(_profileData.status === 'success') {
+      setProfileData(_profileData);
+      dispatch(setLogin(_profileData));
+    } 
+    AsyncStorage.setItem(AUTH_DATA_KEY, JSON.stringify({...authData, ..._profileData}));
+  }
+
   return (
-    <AuthContext.Provider value={{authData, loading, signIn, signOut}}>
+    <AuthContext.Provider value={{authData, loading, signIn, signOut, updateProfile}}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,27 +3,32 @@ export type UserInfo = {
   name: string;
   email: string;
   phone: string;
-}
+};
 
-type Action = { type: "LOGIN" ; payload: UserInfo } | { type: "LOGOUT" ; payload: {} }
+type Action =
+  | {type: 'LOGIN'; payload: UserInfo}
+  | {type: 'LOGOUT'; payload: {}};
 
 const defaultState: UserInfo = {
-  accountNumber: "",
-  name: "",
-  email: "",
-  phone: "",
+  accountNumber: '',
+  name: '',
+  email: '',
+  phone: '',
 };
 
 export default (state = defaultState, action: Action) => {
+  console.log("=== actions", action)
   switch (action.type) {
-    case "LOGIN":
+    case 'LOGIN':
       return {
         ...state,
+        accountNumber: action.payload.accountNumber,
         name: action.payload.name,
         phone: action.payload.phone,
-      }
-    case "LOGOUT":
-      return defaultState
+        email: action.payload.email,
+      };
+    case 'LOGOUT':
+      return defaultState;
     default:
       return state;
   }

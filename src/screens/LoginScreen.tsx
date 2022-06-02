@@ -1,18 +1,15 @@
 import React, {useState} from 'react';
 import {
-  Platform,
-  ActivityIndicator,
   Text,
   Image,
-  StatusBar,
   View,
-  TouchableOpacity,
   SafeAreaView,
   StyleSheet,
   Dimensions,
+  Platform,
+  ScrollView,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// import {styles} from '../theme/styles';
 import {useAuth} from '../contexts/Auth';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -20,58 +17,56 @@ import Loader from '../components/Loader';
 
 const LoginScreen: React.FC = () => {
   const [loading, isLoading] = useState(false);
-  const [email, setEmail] = useState('kevinwong@email.com');
-  const [password, setPassword] = useState('123456');
-
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
+  const [email, setEmail] = useState<string | undefined>('kevinwong@email.com');
+  const [password, setPassword] = useState<string | undefined>('123456');
 
   const auth = useAuth();
 
   const onLogin = async () => {
     isLoading(true);
-    await auth.signIn(email, password);
+    if (email && password) {
+      await auth.signIn(email, password);
+    }
   };
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.container}
-      scrollEnabled={false}
-      style={{height: Dimensions.get('window').height}}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.textHeader}>WELCOME</Text>
-          <Image
-            style={styles.logo}
-            source={require('../../assets/logo.png')}
-          />
-        </View>
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <Input
-              placeholder="Email"
-              onChangeText={val => setEmail(val)}
-              value={email}
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView
+        contentContainerStyle={styles.container}
+        scrollEnabled={true}
+        enableAutomaticScroll={true}
+        style={{height: Dimensions.get('window').height}}>
+        <ScrollView>
+          <View style={styles.header}>
+            <Text style={styles.textHeader}>WELCOME</Text>
+            <Image
+              style={styles.logo}
+              source={require('../../assets/logo.png')}
             />
-            <Input
-              value={password}
-              placeholder="Password"
-              onChangeText={val => setPassword(val)}
-              secureTextEntry
-            />
-            <Button title="Sign in" onPress={onLogin} />
-          </>
-        )}
-      </SafeAreaView>
-    </KeyboardAwareScrollView>
+          </View>
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <Input
+                title="Email"
+                placeholder="Your email"
+                onChangeText={val => setEmail(val)}
+                value={email}
+              />
+              <Input
+                title="Password"
+                value={password}
+                placeholder="Your password"
+                onChangeText={val => setPassword(val)}
+                secureTextEntry
+              />
+              <Button title="Sign in" onPress={onLogin} />
+            </>
+          )}
+        </ScrollView>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -98,6 +93,6 @@ const styles = StyleSheet.create({
     height: 120,
     resizeMode: 'contain',
     alignSelf: 'center',
-    marginTop: 20
+    marginTop: 20,
   },
 });

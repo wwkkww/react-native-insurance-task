@@ -87,6 +87,6 @@ export const apis: APIS = {
     remoteUrl: 'http://myapiendpoint/users/get_plan',
     requestMethod: 'POST',
     localDataEN: EN_PLAN_DATA,
-    localDataMY: EN_PLAN_DATA,
+    localDataMY: MY_PLAN_DATA,
   },
 };

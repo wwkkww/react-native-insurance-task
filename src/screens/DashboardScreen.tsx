@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Platform,
-  ActivityIndicator,
   Text,
   Image,
   ListRenderItem,
@@ -12,28 +10,29 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {useSelector} from 'react-redux';
-// import {styles} from '../theme/styles';s
-import {useAuth} from '../contexts/Auth';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AppStackParamList} from '../routes/AppStack';
+import {useNavigation} from '@react-navigation/native';
 import {RootState} from '../store';
 import {UserInfo} from '../store/reducers/LoginReducer';
 import {AppInfo} from '../store/reducers/AppReducer';
 import Button from '../components/Button';
 import Loader from '../components/Loader';
+import Signout from '../components/Signout';
 import {getPlanByAccountNumber} from '../services/planService';
-import {apis, SourceType, Plan, Plans} from '../apis/API';
+import {Plan, Plans} from '../apis/API';
 
-const DashboardScreen = (props: any) => {
+type DashboardScreenProp = StackNavigationProp<AppStackParamList, 'Dashboard'>;
+
+const DashboardScreen = () => {
   const userInfo: UserInfo = useSelector((state: RootState) => state.UserInfo);
   const appInfo: AppInfo = useSelector((state: RootState) => state.AppInfo);
   const [loading, isLoading] = useState(true);
   const [plans, setPlans] = useState<Plan[] | null>(null);
-
-  const auth = useAuth();
-  const signOut = () => {
-    auth.signOut();
-  };
+  const navigation = useNavigation<DashboardScreenProp>();
 
   useEffect(() => {
+    
     let mounted = true;
     getPlanByAccountNumber(userInfo.accountNumber, appInfo.language).then(
       data => {
@@ -43,29 +42,32 @@ const DashboardScreen = (props: any) => {
         isLoading(false);
       },
     );
-
     return () => {
       mounted = false;
     };
   }, []);
 
-  useEffect(() => {
-    if (plans) {
-      console.log('plans', JSON.stringify(plans));
-    }
-  }, [plans]);
 
   const renderPlanRow: ListRenderItem<Plan> = ({item}) => {
     return (
-      <View style={styles.column}>
-        <View style={styles.row}>
-          <Text style={styles.title}>{item.product.label}: </Text>
-          <Text style={styles.title}>{item.product.value}</Text>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('Plan', {data: item, user: userInfo})
+        }>
+        <View style={styles.column}>
+          <View style={styles.row}>
+            <Text style={styles.title}>{item.product.label}: </Text>
+            <Text style={styles.title}>{item.product.value}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.title}>{item.sumAssured.label}: </Text>
+            <Text style={styles.title}>{item.sumAssured.value}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.text}>{item.description.value}</Text>
+          </View>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.text}>{item.description.value}</Text>
-        </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -77,7 +79,7 @@ const DashboardScreen = (props: any) => {
         </Text>
       </View>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : plans && plans.length > 0 ? (
         <FlatList
           data={plans}
@@ -87,29 +89,12 @@ const DashboardScreen = (props: any) => {
       ) : (
         <Text style={styles.title}>No policy found! </Text>
       )}
-      {/* {!loading ? (
-        plans && plans.length > 0 ? (
-          <FlatList
-            data={plans}
-            renderItem={renderPlanRow}
-            keyExtractor={item => item.product.value}
-          />
-        ) : (
-          <Text style={styles.title}>No policy found! </Text>
-        )
-      ) : null} */}
 
-      {/* <Button
-        title="Plan Details"
-        onPress={() => props.navigation.navigate('Plan')}
-      /> */}
       <Button
         title="Settings"
-        onPress={() => props.navigation.navigate('Settings')}
+        onPress={() => navigation.navigate('Settings')}
       />
-      <View style={styles.logout}>
-        <Button title="Sign Out" onPress={signOut} />
-      </View>
+      <Signout />
     </SafeAreaView>
   );
 };
@@ -134,7 +119,7 @@ const styles = StyleSheet.create({
   },
   column: {
     flexDirection: 'column',
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#F5D0C4',
     padding: 12,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -145,22 +130,11 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '800',
   },
   text: {
-    fontSize: 10,
+    fontSize: 14,
     color: '#000',
-  },
-  logout: {
-    // position: 'absolute',
-    // bottom: 80,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // alignSelf: 'center',
-    // width: '90%',
-    // backgroundColor: '#f4511e',
-    // // padding: 12,
-    // borderRadius: 8,
   },
 });
