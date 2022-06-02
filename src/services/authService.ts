@@ -2,10 +2,10 @@ import {apis, SourceType} from '../apis/API';
 
 export type AuthData = {
   sessionToken: string;
-  agentCode: string;
-  role: string;
+  accountNumber: string;
   name: string;
   email: string;
+  phone: string;
   status: string;
   message: string;
   status_code: number;

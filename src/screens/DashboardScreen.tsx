@@ -1,11 +1,10 @@
-
 import React from 'react';
 import {Button, Text, View} from 'react-native';
 
 import {styles} from '../theme/styles';
 import {useAuth} from '../contexts/Auth';
 
-export const HomeScreen = () => {
+const DashboardScreen = () => {
   const auth = useAuth();
   const signOut = () => {
     auth.signOut();
@@ -18,3 +17,5 @@ export const HomeScreen = () => {
     </View>
   );
 };
+
+export default DashboardScreen;
