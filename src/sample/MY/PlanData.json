@@ -1,0 +1,64 @@
+{
+  "plans": [
+    {
+      "product": {
+        "label": "Produk",
+        "value": "Simpanan InvestLink"
+      },
+      "sumAssured": {
+        "label": "Jumlah diinsuranskan",
+        "value": 300000
+      },
+      "payment": {
+        "label": "Bayaran",
+        "value": "Tahuanan"
+      },
+      "age": {
+        "label": "Umur",
+        "value": 30
+      },
+      "dob": {
+        "label": "Tarikh lahir",
+        "value": "01/01/1990" 
+      },
+      "term": {
+        "label": "Tempoh bayaran", 
+        "value": 10
+      },
+      "description": {
+        "label": "Bitiran",
+        "value": "Lacinia at quis risus sed vulputate odio ut enim. Integer quis auctor elit sed vulputate mi sit amet mauris. Eget arcu dictum varius duis at consectetur lorem donec massa. Ullamcorper morbi tincidunt ornare massa. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Ornare arcu dui vivamus arcu felis bibendum ut. Nullam eget felis eget nunc."
+      }
+    },
+    {
+      "product": {
+        "label": "Produk",
+        "value": "Pelan Pro Sihat"
+      },
+      "sumAssured": {
+        "label": "Jumlah diinsuranskan",
+        "value": 1500000
+      },
+      "payment": {
+        "label": "Bayaran",
+        "value": "Tahuanan"
+      },
+      "age": {
+        "label": "Umur",
+        "value": 30
+      },
+      "dob": {
+        "label": "Tarikh lahir",
+        "value": "01/01/1990" 
+      },
+      "term": {
+        "label": "Tempoh bayaran", 
+        "value": 30
+      },
+      "description": {
+        "label": "Bitiran",
+        "value": "Justo laoreet sit amet cursus sit. Diam quis enim lobortis scelerisque fermentum dui faucibus. Feugiat nisl pretium fusce id velit ut tortor pretium viverra. Adipiscing enim eu turpis egestas pretium aenean pharetra magna. Consequat nisl vel pretium lectus quam. Volutpat odio facilisis mauris sit amet. Leo duis ut diam quam nulla porttitor massa."
+      }
+    }
+  ]
+}

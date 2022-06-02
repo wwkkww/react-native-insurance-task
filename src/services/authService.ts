@@ -11,18 +11,19 @@ export type AuthData = {
   status_code: number;
 };
 
-const signIn = (email: string, _password: string): Promise<AuthData> => {
+const signIn = (email: string, password: string): Promise<AuthData> => {
   return new Promise((resolve) => {
     let response: AuthData;
     setTimeout(() => {
       const { login } = apis
+      const payload = JSON.stringify({ email, password })
       if(login.sourceType === SourceType.local) {
         response = login.localData
       } else {
-        console.log('call api endpoint')
+        console.log('call api endpointwith payload', payload)
       }
       resolve({...response});
-    }, 1000);
+    }, 2500);
   });
 };
 

@@ -1,6 +1,8 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch, useSelector} from 'react-redux';
 import {AuthData, authService} from '../services/authService';
+import {setLogin} from '../store/actions/LoginAction';
 
 type AuthContextData = {
   authData?: AuthData;
@@ -16,6 +18,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider: React.FC = ({children}) => {
   const [authData, setAuthData] = useState<AuthData>();
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     loadStorageData();
@@ -40,6 +43,7 @@ const AuthProvider: React.FC = ({children}) => {
     console.log('login success', _authData)
     if(_authData.status === 'success') {
       setAuthData(_authData);
+      dispatch(setLogin(_authData));
     } 
     AsyncStorage.setItem(AUTH_DATA_KEY, JSON.stringify(_authData));
   };

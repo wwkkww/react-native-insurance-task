@@ -1,0 +1,64 @@
+{
+  "plans": [
+    {
+      "product": {
+        "label": "Product",
+        "value": "Fund InvestLink"
+      },
+      "sumAssured": {
+        "label": "Sum assured",
+        "value": 300000
+      },
+      "payment": {
+        "label": "Payment",
+        "value": "Annually"
+      },
+      "age": {
+        "label": "Age",
+        "value": 30
+      },
+      "dob": {
+        "label": "Date of Birth",
+        "value": "01/01/1990" 
+      },
+      "term": {
+        "label": "Policy term", 
+        "value": 10
+      },
+      "description": {
+        "label": "Info",
+        "value": "A good medical plan should be able to protect you when you require medical treatment and even when you are healthy. For this reason, we have designed A-Plus Total Health to provide comprehensive medical coverage that safeguards you against escalating medical costs without you having to worry about any lifetime limit. And as we all know that prevention is better than cure, this plan will also reimburse you the cost for health checks and vaccinations to help you determine your health condition and identify any early signs of health issues as well as help you with illness prevention"
+      }
+    },
+    {
+      "product": {
+        "label": "Product",
+        "value": "Pro Health"
+      },
+      "sumAssured": {
+        "label": "Sum assured",
+        "value": 1000000
+      },
+      "payment": {
+        "label": "Payment",
+        "value": "Annual"
+      },
+      "age": {
+        "label": "Age",
+        "value": 30
+      },
+      "dob": {
+        "label": "Date of Birth",
+        "value": "01/01/1990" 
+      },
+      "term": {
+        "label": "Policy term", 
+        "value": 30
+      },
+      "description": {
+        "label": "Info",
+        "value": "When you participate in Pro Health and, at the same time, sign up as an AIA Vitality member, you will also get to enjoy Health Rewards. Health Rewards offers you additional benefits such as upgrade to your room and board limit and/or increasing the amount in your Health Wallet every year, all without having to pay any additional contribution."
+      }
+    }
+  ]
+}

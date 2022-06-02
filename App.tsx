@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {Router} from './src/routes/Router';
+import { Provider } from 'react-redux';
+import Store from './src/store';
 import {AuthProvider} from './src/contexts/Auth';
 import RNBootSplash from 'react-native-bootsplash';
 
@@ -11,9 +13,11 @@ const App = () => {
   }, [])
   
   return (
-    <AuthProvider>
-      <Router />
-    </AuthProvider>
+    <Provider store={Store} >
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
+    </Provider>
   );
 };
 

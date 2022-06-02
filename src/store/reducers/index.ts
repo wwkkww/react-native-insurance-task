@@ -3,8 +3,8 @@ import LoginReducer from './LoginReducer';
 import AppReducer from './AppReducer';
 
 const Reducers = combineReducers({
-  LoginReducer: LoginReducer,
-  AppReducer: AppReducer
+  UserInfo: LoginReducer,
+  AppInfo: AppReducer
 });
 
 export default Reducers;

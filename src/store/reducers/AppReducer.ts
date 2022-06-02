@@ -1,4 +1,4 @@
-type AppState = {
+export type AppInfo = {
   theme: string;
   language: string;
 };
@@ -9,8 +9,8 @@ const defaultState = {
 };
 
 type Action =
-  | {type: 'SET_LANGUAGE'; payload: AppState}
-  | {type: 'TOGGLE_THEME'; payload: AppState};
+  | {type: 'SET_LANGUAGE'; payload: AppInfo}
+  | {type: 'TOGGLE_THEME'; payload: AppInfo};
 
 export default (state = defaultState, action: Action) => {
   switch (action.type) {
