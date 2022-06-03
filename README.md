@@ -1,4 +1,4 @@
-# MySebang app
+# MY TEST APP
 
 ## This app is build using:
 
