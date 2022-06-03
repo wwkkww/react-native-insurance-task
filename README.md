@@ -2,9 +2,9 @@
 
 ## This app is build using:
 
-react-native: 0.68.2
-node: 14.19.1
-yarn: 1.22.18
+- react-native: 0.68.2
+- node: 14.19.1
+- yarn: 1.22.18
 
 ## To start development
 
