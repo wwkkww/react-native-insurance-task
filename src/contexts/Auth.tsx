@@ -44,7 +44,6 @@ const AuthProvider: React.FC = ({children}) => {
 
   const signIn = async (email: string, password: string) => {
     const _authData = await authService.signIn(email, password );
-    console.log('login success', _authData)
     if(_authData.status === 'success') {
       setAuthData(_authData);
       dispatch(setLogin(_authData));
@@ -59,7 +58,6 @@ const AuthProvider: React.FC = ({children}) => {
 
   const updateProfile = async (email: string, name: string, phone: string): Promise<void> => {
     const _profileData = await authService.updateProfileByEmail(email, name, phone);
-    console.log('update success', _profileData)
     if(_profileData.status === 'success') {
       setProfileData(_profileData);
       dispatch(setLogin(_profileData));

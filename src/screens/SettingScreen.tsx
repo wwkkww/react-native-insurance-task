@@ -40,7 +40,6 @@ const SettingScreen = () => {
       setEmail(userInfo.email);
       setAccountNumber(userInfo.accountNumber);
     }
-    console.log(userInfo);
   }, []);
 
   const saveProfile = () => {

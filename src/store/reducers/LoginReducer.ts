@@ -17,7 +17,6 @@ const defaultState: UserInfo = {
 };
 
 export default (state = defaultState, action: Action) => {
-  console.log("=== actions", action)
   switch (action.type) {
     case 'LOGIN':
       return {

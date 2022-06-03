@@ -10,7 +10,7 @@ const signIn = (email: string, password: string): Promise<AuthData> => {
       if(login.sourceType === SourceType.local) {
         response = login.localData
       } else {
-        console.log('call api endpointwith payload', payload)
+        console.log('call api endpointwith payload')
       }
       resolve({...response});
     }, 2000);
@@ -26,7 +26,7 @@ const updateProfileByEmail = (email: string, name: string, phone: string): Promi
       if(updateProfile.sourceType === SourceType.local) {
         response = {...updateProfile.localData, email, name, phone}
       } else {
-        console.log('call api endpoint with payload', payload)
+        console.log('call api endpoint with payload')
       }
       resolve(response);
     }, 2500);
